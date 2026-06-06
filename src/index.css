@@ -15,7 +15,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 13%;
 
-    --primary: 358 73% 49%;
+    /* Angel purple #683A8D */
+    --primary: 273 42% 39%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 97%;
@@ -24,7 +25,7 @@
     --muted: 0 0% 97%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 252 100% 65%;
+    --accent: 273 42% 39%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -32,7 +33,13 @@
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 358 73% 49%;
+    --ring: 273 42% 39%;
+
+    /* Brand tokens */
+    --deep: 358 84% 56%;       /* #ED3237 */
+    --deep-foreground: 0 0% 100%;
+    --angel: 273 42% 39%;      /* #683A8D */
+    --angel-foreground: 0 0% 100%;
 
     --radius: 0.25rem;
 

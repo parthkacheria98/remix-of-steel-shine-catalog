@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
+import { CatalogueHierarchy } from "@/components/CatalogueMenu";
 import { useCatalog } from "@/data/useCatalog";
-import { useBrand } from "@/context/BrandContext";
 import { Shield, Droplets, Clock, Award } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
 
@@ -16,10 +16,9 @@ const fadeIn = {
 
 const Index = () => {
   const { data, isLoading, error } = useCatalog();
-  const { brand, label } = useBrand();
 
-  const categories = (data?.categories ?? []).filter((c) => c.brandSlug === brand);
-  const products = (data?.products ?? []).filter((p) => p.brandSlug === brand);
+  const categories = data?.categories ?? [];
+  const products = data?.products ?? [];
   const featured = products.slice(0, 6);
 
   return (
@@ -30,7 +29,7 @@ const Index = () => {
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6">
               <motion.span {...fadeIn} className="text-primary font-mono text-xs tracking-tighter uppercase">
-                {label} — Industrial Excellence
+                Ratandeep Houseware — Industrial Excellence
               </motion.span>
               <motion.h1
                 {...fadeIn}
@@ -44,14 +43,16 @@ const Index = () => {
                 transition={{ ...fadeIn.transition, delay: 0.2 }}
                 className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-md"
               >
-                Durable • Hygienic • Long Lasting. Engineered for high-performance environments and professional kitchens.
+                Home of the <span className="text-deep font-semibold">Deep</span> and{" "}
+                <span className="text-angel font-semibold">Angel</span> ranges. Durable • Hygienic • Long Lasting.
+                Engineered for professional kitchens and modern homes.
               </motion.p>
-              <motion.div {...fadeIn} transition={{ ...fadeIn.transition, delay: 0.3 }}>
+              <motion.div {...fadeIn} transition={{ ...fadeIn.transition, delay: 0.3 }} className="flex gap-3">
                 <Link
-                  to={`/categories?brand=${brand}`}
-                  className="inline-block bg-primary text-primary-foreground px-8 py-4 font-heading font-bold uppercase tracking-widest text-xs hover:bg-accent transition-colors duration-300"
+                  to="/categories"
+                  className="inline-block bg-primary text-primary-foreground px-8 py-4 font-heading font-bold uppercase tracking-widest text-xs hover:bg-foreground transition-colors duration-300"
                 >
-                  Browse {label}
+                  Browse Catalogue
                 </Link>
               </motion.div>
             </div>
@@ -69,22 +70,41 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Categories */}
+      {/* Catalogue Hierarchy */}
       <section className="max-w-[1200px] mx-auto px-6 py-20">
+        <div className="flex items-end justify-between mb-8">
+          <div>
+            <span className="text-primary font-mono text-xs tracking-tighter uppercase">Catalogue</span>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tighter mt-2">Browse the full range</h2>
+            <p className="text-muted-foreground mt-3 max-w-md">
+              Explore by brand, category, and product — all collapsible to keep things tidy.
+            </p>
+          </div>
+          <Link to="/categories" className="hidden md:inline-flex text-sm font-semibold hover:text-primary transition-colors items-center gap-2">
+            View Full Catalogue <span>→</span>
+          </Link>
+        </div>
+        <div className="border border-border bg-muted/20">
+          <CatalogueHierarchy variant="full" />
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section className="max-w-[1200px] mx-auto px-6 pb-20">
         <div className="flex items-end justify-between mb-12">
           <div>
             <span className="text-primary font-mono text-xs tracking-tighter uppercase">Product Range</span>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tighter mt-2">Categories</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tighter mt-2">Featured Categories</h2>
           </div>
-          <Link to={`/categories?brand=${brand}`} className="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2">
+          <Link to="/categories" className="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2">
             View All <span>→</span>
           </Link>
         </div>
         {isLoading && <p className="text-muted-foreground">Loading catalogue…</p>}
         {error && <p className="text-destructive">Failed to load catalogue.</p>}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-          {categories.map((cat) => (
-            <CategoryCard key={cat.slug} category={cat} />
+          {categories.slice(0, 8).map((cat) => (
+            <CategoryCard key={`${cat.brandSlug}-${cat.slug}`} category={cat} />
           ))}
         </div>
       </section>
@@ -110,7 +130,7 @@ const Index = () => {
       <section className="max-w-[1200px] mx-auto px-6 py-20">
         <div className="text-center mb-16">
           <span className="text-primary font-mono text-xs tracking-tighter uppercase">The Standard</span>
-          <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tighter mt-2">Why Choose {label}</h2>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tighter mt-2">Why Choose Ratandeep Houseware</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
@@ -140,8 +160,8 @@ const Index = () => {
             Reach out for bulk orders, custom specifications, or distribution enquiries.
           </p>
           <Link
-            to={`/contact?brand=${brand}`}
-            className="inline-block bg-primary text-primary-foreground px-8 py-4 font-heading font-bold uppercase tracking-widest text-xs hover:bg-accent transition-colors duration-300"
+            to="/contact"
+            className="inline-block bg-primary text-primary-foreground px-8 py-4 font-heading font-bold uppercase tracking-widest text-xs hover:bg-background hover:text-foreground transition-colors duration-300"
           >
             Get in Touch
           </Link>
