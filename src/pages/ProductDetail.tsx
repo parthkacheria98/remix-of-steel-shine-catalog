@@ -5,13 +5,11 @@ import { VariantList } from "@/components/VariantList";
 import { FeatureList } from "@/components/FeatureList";
 import { ProductCard } from "@/components/ProductCard";
 import { useCatalog } from "@/data/useCatalog";
-import { useBrand } from "@/context/BrandContext";
 import { imageForProduct } from "@/data/categoryImages";
 
 const ProductDetail = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const { brand, slug } = useParams<{ brand: string; slug: string }>();
   const { data, isLoading } = useCatalog();
-  const { brand } = useBrand();
 
   const product = (data?.products ?? []).find((p) => p.slug === slug && p.brandSlug === brand);
 
@@ -23,15 +21,15 @@ const ProductDetail = () => {
     return (
       <div className="max-w-[1200px] mx-auto px-6 py-20 text-center">
         <h1 className="text-2xl font-heading font-bold">Product not found</h1>
-        <Link to={`/categories?brand=${brand}`} className="text-primary mt-4 inline-block">
-          ← Browse products
+        <Link to="/categories" className="text-primary mt-4 inline-block">
+          ← Browse catalogue
         </Link>
       </div>
     );
   }
 
   const related = (data?.products ?? [])
-    .filter((p) => p.categorySlug === product.categorySlug && p.brandSlug === brand && p.id !== product.id)
+    .filter((p) => p.categorySlug === product.categorySlug && p.brandSlug === product.brandSlug && p.id !== product.id)
     .slice(0, 4);
 
   const features = [
@@ -42,12 +40,13 @@ const ProductDetail = () => {
   ].filter(Boolean) as string[];
 
   const heroImg = imageForProduct(product.categorySlug);
+  const toneClass = product.brandSlug === "deep" ? "text-deep" : "text-angel";
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 py-16">
       <div className="mb-6">
         <Link
-          to={`/categories/${product.categorySlug}?brand=${brand}`}
+          to={`/categories/${product.brandSlug}/${product.categorySlug}`}
           className="text-sm text-muted-foreground hover:text-primary transition-colors"
         >
           ← {product.category}
@@ -64,13 +63,13 @@ const ProductDetail = () => {
 
         <div className="space-y-8">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-bold mb-2">
+            <p className={`text-[10px] uppercase tracking-[0.2em] font-bold mb-2 ${toneClass}`}>
               {product.brand} · {product.category}
             </p>
             <h1 className="text-3xl md:text-4xl font-heading font-bold tracking-tighter">{product.name}</h1>
             <p className="text-muted-foreground mt-4 leading-relaxed">
-              Premium {product.category.toLowerCase()} from the {product.brand} range. Available in{" "}
-              {product.sizes.length} size{product.sizes.length === 1 ? "" : "s"}
+              Premium {product.category.toLowerCase()} from the {product.brand} range by Ratandeep Houseware.
+              Available in {product.sizes.length} size{product.sizes.length === 1 ? "" : "s"}
               {product.designs.length ? ` and ${product.designs.length} finish${product.designs.length === 1 ? "" : "es"}` : ""}.
             </p>
           </div>
@@ -79,8 +78,8 @@ const ProductDetail = () => {
           <FeatureList features={features} />
 
           <Link
-            to={`/contact?brand=${brand}`}
-            className="inline-block bg-primary text-primary-foreground px-8 py-4 font-heading font-bold uppercase tracking-widest text-xs hover:bg-accent transition-colors duration-300"
+            to="/contact"
+            className="inline-block bg-primary text-primary-foreground px-8 py-4 font-heading font-bold uppercase tracking-widest text-xs hover:bg-foreground transition-colors duration-300"
           >
             Enquire Now
           </Link>

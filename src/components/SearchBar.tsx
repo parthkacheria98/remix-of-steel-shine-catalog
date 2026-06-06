@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
 import { useCatalog } from "@/data/useCatalog";
-import { useBrand } from "@/context/BrandContext";
 import { imageForProduct } from "@/data/categoryImages";
 
 interface SearchBarProps {
@@ -13,17 +12,16 @@ export const SearchBar = ({ onClose }: SearchBarProps) => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const { data } = useCatalog();
-  const { brand } = useBrand();
 
   const q = query.toLowerCase();
   const results =
     q.length > 1 && data
       ? data.products
-          .filter((p) => p.brandSlug === brand)
           .filter(
             (p) =>
               p.name.toLowerCase().includes(q) ||
               p.category.toLowerCase().includes(q) ||
+              p.brand.toLowerCase().includes(q) ||
               p.sizes.some((s) => s.toLowerCase().includes(q)) ||
               p.variants.some((v) => v.sku.toLowerCase().includes(q))
           )
@@ -37,7 +35,7 @@ export const SearchBar = ({ onClose }: SearchBarProps) => {
         <input
           autoFocus
           type="text"
-          placeholder="Search by product, category, size or SKU..."
+          placeholder="Search by product, brand, category, size or SKU..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="w-full bg-transparent text-foreground placeholder:text-muted-foreground outline-none text-sm py-1"
@@ -45,26 +43,31 @@ export const SearchBar = ({ onClose }: SearchBarProps) => {
       </div>
       {results.length > 0 && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-background border border-border shadow-medium z-50 max-h-80 overflow-y-auto">
-          {results.map((p) => (
-            <button
-              key={p.id}
-              onClick={() => {
-                navigate(`/product/${p.slug}?brand=${brand}`);
-                onClose?.();
-              }}
-              className="w-full text-left px-4 py-3 hover:bg-muted transition-colors flex items-center gap-4 border-b border-border last:border-0"
-            >
-              <img
-                src={imageForProduct(p.categorySlug)}
-                alt={p.name}
-                className="w-12 h-12 object-cover mix-blend-multiply bg-muted"
-              />
-              <div>
-                <p className="text-sm font-medium">{p.name}</p>
-                <p className="text-xs text-muted-foreground">{p.category}</p>
-              </div>
-            </button>
-          ))}
+          {results.map((p) => {
+            const toneClass = p.brandSlug === "deep" ? "text-deep" : "text-angel";
+            return (
+              <button
+                key={p.id}
+                onClick={() => {
+                  navigate(`/product/${p.brandSlug}/${p.slug}`);
+                  onClose?.();
+                }}
+                className="w-full text-left px-4 py-3 hover:bg-muted transition-colors flex items-center gap-4 border-b border-border last:border-0"
+              >
+                <img
+                  src={imageForProduct(p.categorySlug)}
+                  alt={p.name}
+                  className="w-12 h-12 object-cover mix-blend-multiply bg-muted"
+                />
+                <div>
+                  <p className="text-sm font-medium">{p.name}</p>
+                  <p className={`text-[10px] uppercase tracking-widest font-bold ${toneClass}`}>
+                    {p.brand} · {p.category}
+                  </p>
+                </div>
+              </button>
+            );
+          })}
         </div>
       )}
     </div>

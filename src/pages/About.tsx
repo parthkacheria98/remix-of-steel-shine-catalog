@@ -13,14 +13,15 @@ const About = () => (
     {/* Hero */}
     <section className="max-w-[1200px] mx-auto px-6 py-16">
       <motion.div {...fadeIn} className="max-w-2xl">
-        <span className="text-primary font-mono text-xs tracking-tighter uppercase">About DEEP STEEL</span>
+        <span className="text-primary font-mono text-xs tracking-tighter uppercase">About Ratandeep Houseware</span>
         <h1 className="text-4xl md:text-6xl font-heading font-bold tracking-tighter mt-4 mb-6 leading-[0.95]">
           The Standard of Hygiene.
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          Since 1984, DEEP STEEL has been at the forefront of stainless steel kitchenware manufacturing.
-          We engineer products that meet the rigorous demands of commercial kitchens while maintaining
-          the elegance expected in premium households.
+          Ratandeep Houseware has been crafting premium stainless steel kitchenware for decades, home to the
+          <span className="text-deep font-semibold"> Deep</span> and
+          <span className="text-angel font-semibold"> Angel</span> ranges. We engineer products that meet the
+          rigorous demands of commercial kitchens while maintaining the elegance expected in premium households.
         </p>
       </motion.div>
     </section>

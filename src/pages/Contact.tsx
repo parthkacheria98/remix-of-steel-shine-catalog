@@ -79,9 +79,9 @@ const Contact = () => {
         <div className="space-y-8">
           <div className="space-y-6">
             {[
-              { icon: MapPin, label: "Address", value: "DEEP STEEL Industries Pvt. Ltd.\nPlot 42, Industrial Area Phase II\nMumbai, Maharashtra 400001" },
+              { icon: MapPin, label: "Address", value: "Ratandeep Houseware LLP\nPlot 42, Industrial Area Phase II\nMumbai, Maharashtra 400001" },
               { icon: Phone, label: "Phone", value: "+91 98765 43210\n+91 22 2345 6789" },
-              { icon: Mail, label: "Email", value: "info@deepsteel.com\nsales@deepsteel.com" },
+              { icon: Mail, label: "Email", value: "info@ratandeephouseware.com\nsales@ratandeephouseware.com" },
             ].map((item) => (
               <div key={item.label} className="flex gap-4">
                 <div className="w-10 h-10 border border-border flex items-center justify-center flex-shrink-0">
