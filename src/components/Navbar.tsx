@@ -54,14 +54,14 @@ export const Navbar = () => {
                   catalogueOpen ? "text-primary" : ""
                 }`}
               >
-                Catalogue
+                CATALOGUE
                 <ChevronDown size={14} className={`transition-transform ${catalogueOpen ? "rotate-180" : ""}`} />
               </button>
               {catalogueOpen && (
                 <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-[420px] bg-background border border-border shadow-hover max-h-[70vh] overflow-y-auto">
                   <div className="px-4 py-3 border-b border-border">
                     <p className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                      Browse Catalogue
+                      Browse CATALOGUE
                     </p>
                   </div>
                   <CatalogueHierarchy onNavigate={() => setCatalogueOpen(false)} />
@@ -123,7 +123,7 @@ export const Navbar = () => {
               </Link>
               <div className="border-t border-border my-2" />
               <p className="px-4 pt-2 pb-1 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                Catalogue
+                CATALOGUE
               </p>
               <CatalogueHierarchy onNavigate={() => setMobileOpen(false)} />
               <div className="border-t border-border my-2" />
