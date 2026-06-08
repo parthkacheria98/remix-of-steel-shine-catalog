@@ -1,5 +1,4 @@
 import { CategoryCard } from "@/components/CategoryCard";
-import { CatalogueHierarchy } from "@/components/CatalogueMenu";
 import { useCatalog } from "@/data/useCatalog";
 
 const CategoriesPage = () => {
@@ -12,19 +11,18 @@ const CategoriesPage = () => {
   return (
     <div className="max-w-[1200px] mx-auto px-6 py-16">
       <div className="mb-12">
-        <span className="text-primary font-mono text-xs tracking-tighter uppercase">Ratandeep Houseware — Full Range</span>
+        <span className="text-primary font-mono text-xs tracking-tighter uppercase">Ratandeep Houseware - Full Range</span>
         <h1 className="text-4xl md:text-5xl font-heading font-bold tracking-tighter mt-2">Catalogue</h1>
         <p className="text-muted-foreground mt-4 max-w-lg">
-          Browse the complete range across our two ranges — <span className="text-deep font-semibold">Deep</span> and{" "}
+          Browse the complete range across our two ranges - <span className="text-deep font-semibold">Deep</span> and{" "}
           <span className="text-angel font-semibold">Angel</span>.
         </p>
       </div>
 
-      {isLoading && <p className="text-muted-foreground">Loading…</p>}
+      {isLoading && <p className="text-muted-foreground">Loading...</p>}
       {error && <p className="text-destructive">Failed to load.</p>}
 
-      <div className="grid lg:grid-cols-[1fr_360px] gap-12">
-        <div className="space-y-16">
+      <div className="space-y-16">
           {[
             { name: "Deep", slug: "deep", tone: "text-deep", cats: deepCats },
             { name: "Angel", slug: "angel", tone: "text-angel", cats: angelCats },
@@ -47,20 +45,6 @@ const CategoriesPage = () => {
               </section>
             ) : null
           )}
-        </div>
-
-        <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="border border-border bg-muted/30">
-            <div className="px-4 py-3 border-b border-border">
-              <p className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                Hierarchy View
-              </p>
-            </div>
-            <div className="max-h-[70vh] overflow-y-auto">
-              <CatalogueHierarchy variant="full" />
-            </div>
-          </div>
-        </aside>
       </div>
     </div>
   );

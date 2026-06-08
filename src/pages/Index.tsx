@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
-import { CatalogueHierarchy } from "@/components/CatalogueMenu";
 import { useCatalog } from "@/data/useCatalog";
 import { Shield, Droplets, Clock, Award } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
@@ -29,7 +28,7 @@ const Index = () => {
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6">
               <motion.span {...fadeIn} className="text-primary font-mono text-xs tracking-tighter uppercase">
-                Ratandeep Houseware — Industrial Excellence
+                Ratandeep Houseware - Industrial Excellence
               </motion.span>
               <motion.h1
                 {...fadeIn}
@@ -67,25 +66,6 @@ const Index = () => {
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Catalogue Hierarchy */}
-      <section className="max-w-[1200px] mx-auto px-6 py-20">
-        <div className="flex items-end justify-between mb-8">
-          <div>
-            <span className="text-primary font-mono text-xs tracking-tighter uppercase">Catalogue</span>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tighter mt-2">Browse the full range</h2>
-            <p className="text-muted-foreground mt-3 max-w-md">
-              Explore by brand, category, and product — all collapsible to keep things tidy.
-            </p>
-          </div>
-          <Link to="/categories" className="hidden md:inline-flex text-sm font-semibold hover:text-primary transition-colors items-center gap-2">
-            View Full Catalogue <span>→</span>
-          </Link>
-        </div>
-        <div className="border border-border bg-muted/20">
-          <CatalogueHierarchy variant="full" />
         </div>
       </section>
 
