@@ -45,7 +45,6 @@ const CategoriesPage = () => {
               </section>
             ) : null
           )}
-        </div>
       </div>
     </div>
   );
