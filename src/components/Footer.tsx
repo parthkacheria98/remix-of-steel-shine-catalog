@@ -11,7 +11,7 @@ export const Footer = () => (
           </Link>
           <p className="text-muted-foreground max-w-sm leading-relaxed">
             Premium stainless steel kitchenware. Home of the <span className="text-deep font-semibold">Deep</span> and{" "}
-            <span className="text-angel font-semibold">Angel</span> ranges — engineered for durability, designed for
+            <span className="text-angel font-semibold">Angel</span> ranges - engineered for durability, designed for
             modern living.
           </p>
         </div>

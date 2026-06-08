@@ -18,10 +18,10 @@ export const VariantList = ({ variants }: VariantListProps) => (
       </div>
       {variants.map((v) => (
         <div key={v.id} className="grid grid-cols-4 gap-4 px-4 py-3 text-sm font-mono">
-          <span>{v.size || "—"}</span>
-          <span>{v.design || "—"}</span>
-          <span>{v.capacity || "—"}</span>
-          <span className="text-muted-foreground">{v.sku || "—"}</span>
+          <span>{v.size || "-"}</span>
+          <span>{v.design || "-"}</span>
+          <span>{v.capacity || "-"}</span>
+          <span className="text-muted-foreground">{v.sku || "-"}</span>
         </div>
       ))}
     </div>
