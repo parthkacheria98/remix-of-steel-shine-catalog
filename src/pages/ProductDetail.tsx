@@ -40,7 +40,9 @@ const ProductDetail = () => {
     "Durable, hygienic, long lasting",
   ].filter(Boolean) as string[];
 
-  const heroImg = imageForProduct(product.categorySlug);
+  const galleryImages = product.images.length > 0
+    ? product.images.map(assetUrl)
+    : [imageForProduct(product.categorySlug)];
   const toneClass = product.brandSlug === "deep" ? "text-deep" : "text-angel";
 
   return (
