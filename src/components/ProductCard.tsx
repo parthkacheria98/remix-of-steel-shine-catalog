@@ -18,7 +18,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <img
             src={img}
             alt={product.name}
-            className="w-full h-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+            className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${hasRealImage ? "" : "mix-blend-multiply"}`}
             loading="lazy"
           />
         </div>
