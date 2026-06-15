@@ -11,7 +11,7 @@ export interface RawProductRow {
   Weight: string | null;
   Size: string | null;
   Category?: string | null;
-  images?: unknown[];
+  images?: Array<{ directus_files_id: string } | string> | null;
 }
 
 export interface Variant {
