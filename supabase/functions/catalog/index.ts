@@ -32,12 +32,23 @@ Deno.serve(async (req) => {
 
     // Normalize: accept either base URL or full /items/<collection> URL in the secret.
     const base = DIRECTUS_URL.replace(/\/$/, '').replace(/\/items\/[^/?#]+$/i, '');
-    const upstream = `${base}/items/${collection}?limit=-1`;
+    // Expand M2M images junction to file UUIDs so client can build asset URLs.
+    const fields = collection === 'Products'
+      ? '*,images.directus_files_id'
+      : '*';
+    const upstream = `${base}/items/${collection}?limit=-1&fields=${encodeURIComponent(fields)}`;
     const res = await fetch(upstream, {
       headers: { Authorization: `Bearer ${DIRECTUS_TOKEN}` },
     });
     const text = await res.text();
-    return new Response(text, {
+    // Inject assetBase so the client can construct /assets/<id> URLs.
+    let body = text;
+    try {
+      const parsed = JSON.parse(text);
+      parsed.assetBase = `${base}/assets`;
+      body = JSON.stringify(parsed);
+    } catch { /* pass-through on non-JSON */ }
+    return new Response(body, {
       status: res.status,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
