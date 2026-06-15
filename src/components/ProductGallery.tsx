@@ -3,10 +3,12 @@ import { useState } from "react";
 interface ProductGalleryProps {
   images: string[];
   productName: string;
+  blend?: boolean;
 }
 
-export const ProductGallery = ({ images, productName }: ProductGalleryProps) => {
+export const ProductGallery = ({ images, productName, blend = false }: ProductGalleryProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const blendClass = blend ? "mix-blend-multiply" : "";
 
   return (
     <div className="space-y-4">
@@ -14,11 +16,11 @@ export const ProductGallery = ({ images, productName }: ProductGalleryProps) => 
         <img
           src={images[activeIndex]}
           alt={productName}
-          className="w-full h-full object-cover mix-blend-multiply"
+          className={`w-full h-full object-cover ${blendClass}`}
         />
       </div>
       {images.length > 1 && (
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap">
           {images.map((img, i) => (
             <button
               key={i}
@@ -27,7 +29,7 @@ export const ProductGallery = ({ images, productName }: ProductGalleryProps) => 
                 i === activeIndex ? "border-primary shadow-soft" : "border-border opacity-60 hover:opacity-100"
               }`}
             >
-              <img src={img} alt={`${productName} ${i + 1}`} className="w-full h-full object-cover mix-blend-multiply" />
+              <img src={img} alt={`${productName} ${i + 1}`} className={`w-full h-full object-cover ${blendClass}`} />
             </button>
           ))}
         </div>
