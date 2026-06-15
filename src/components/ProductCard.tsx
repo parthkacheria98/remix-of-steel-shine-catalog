@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Product } from "@/data/api";
+import { Product, assetUrl } from "@/data/api";
 import { imageForProduct } from "@/data/categoryImages";
 
 interface ProductCardProps {
@@ -8,7 +8,8 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const img = imageForProduct(product.categorySlug);
+  const img = product.images[0] ? assetUrl(product.images[0]) : imageForProduct(product.categorySlug);
+  const hasRealImage = product.images.length > 0;
   const toneClass = product.brandSlug === "deep" ? "text-deep" : "text-angel";
   return (
     <motion.div whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
@@ -17,7 +18,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <img
             src={img}
             alt={product.name}
-            className="w-full h-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+            className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${hasRealImage ? "" : "mix-blend-multiply"}`}
             loading="lazy"
           />
         </div>

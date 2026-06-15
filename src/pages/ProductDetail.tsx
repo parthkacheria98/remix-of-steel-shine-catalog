@@ -6,6 +6,7 @@ import { FeatureList } from "@/components/FeatureList";
 import { ProductCard } from "@/components/ProductCard";
 import { useCatalog } from "@/data/useCatalog";
 import { imageForProduct } from "@/data/categoryImages";
+import { assetUrl } from "@/data/api";
 
 const ProductDetail = () => {
   const { brand, slug } = useParams<{ brand: string; slug: string }>();
@@ -39,7 +40,9 @@ const ProductDetail = () => {
     "Durable, hygienic, long lasting",
   ].filter(Boolean) as string[];
 
-  const heroImg = imageForProduct(product.categorySlug);
+  const galleryImages = product.images.length > 0
+    ? product.images.map(assetUrl)
+    : [imageForProduct(product.categorySlug)];
   const toneClass = product.brandSlug === "deep" ? "text-deep" : "text-angel";
 
   return (
@@ -59,7 +62,7 @@ const ProductDetail = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
       >
-        <ProductGallery images={[heroImg]} productName={product.name} />
+        <ProductGallery images={galleryImages} productName={product.name} blend={product.images.length === 0} />
 
         <div className="space-y-8">
           <div>
