@@ -10,6 +10,7 @@ export interface RawProductRow {
   Capacity: string | null;
   Weight: string | null;
   Size: string | null;
+  Category?: string | null;
   images?: unknown[];
 }
 
@@ -60,8 +61,7 @@ export const slugify = (s: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-// Category = trailing keyword of Item_Name (e.g. "Bidding Dabba" -> "Dabba",
-// "Rolling Outer Clip Tiffin" -> "Tiffin"). Backend-agnostic heuristic.
+// Fallback only: trailing keyword of Item_Name if Category column is missing.
 const deriveCategory = (itemName: string) => {
   const parts = itemName.trim().split(/\s+/);
   return parts[parts.length - 1] || itemName;
@@ -82,7 +82,7 @@ export function transform(rows: RawProductRow[]): Catalog {
   for (const r of published) {
     const brand = r.Brand;
     const brandSlug = slugify(brand);
-    const category = deriveCategory(r.Item_Name);
+    const category = clean(r.Category) || deriveCategory(r.Item_Name);
     const categorySlug = slugify(category);
     const itemSlug = slugify(r.Item_Name);
     const key = `${brandSlug}/${itemSlug}`;
