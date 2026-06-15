@@ -6,6 +6,7 @@ import { FeatureList } from "@/components/FeatureList";
 import { ProductCard } from "@/components/ProductCard";
 import { useCatalog } from "@/data/useCatalog";
 import { imageForProduct } from "@/data/categoryImages";
+import { assetUrl } from "@/data/api";
 
 const ProductDetail = () => {
   const { brand, slug } = useParams<{ brand: string; slug: string }>();
