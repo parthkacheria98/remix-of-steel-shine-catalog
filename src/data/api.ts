@@ -34,6 +34,7 @@ export interface Product {
   designs: string[];
   sizes: string[];
   variants: Variant[];
+  images: string[];
 }
 
 export interface Category {
