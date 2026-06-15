@@ -168,3 +168,7 @@ export async function fetchCatalog(): Promise<Catalog> {
   const rows = (data?.data ?? []) as RawProductRow[];
   return transform(rows);
 }
+
+const CATALOG_BASE = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/catalog`;
+export const assetUrl = (fileId: string) => `${CATALOG_BASE}/asset/${fileId}`;
+
