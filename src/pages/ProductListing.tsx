@@ -27,7 +27,7 @@ const ProductListing = () => {
   const toneClass = category.brandSlug === "deep" ? "text-deep" : "text-angel";
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 py-16">
+    <div data-brand={category.brandSlug} className="max-w-[1200px] mx-auto px-6 py-16">
       <div className="mb-4">
         <Link to="/categories" className="text-sm text-muted-foreground hover:text-primary transition-colors">
           ← All Categories

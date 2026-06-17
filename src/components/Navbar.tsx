@@ -27,22 +27,29 @@ export const Navbar = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, [catalogueOpen]);
 
-  const links = [
-    { label: "Home", to: "/" },
-    { label: "About", to: "/about" },
-    { label: "Contact", to: "/contact" },
-  ];
-
   return (
     <>
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
-          <Link to="/" className="text-xl md:text-2xl font-heading font-bold tracking-tighter flex items-center gap-2">
+        <div className="max-w-[1200px] mx-auto px-6 h-20 grid grid-cols-3 items-center">
+          {/* Logo - left */}
+          <Link to="/" className="text-xl md:text-2xl font-heading font-bold tracking-tighter flex items-center gap-2 justify-self-start">
             <div className="w-8 h-8 bg-primary rounded-sm" />
             RATANDEEP HOUSEWARE
           </Link>
 
-          <div className="hidden md:flex items-center gap-10 text-[13px] font-medium uppercase tracking-widest text-foreground/60">
+          {/* Search - center */}
+          <div className="justify-self-center">
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="p-2 hover:bg-muted rounded-full transition-colors"
+              aria-label="Search"
+            >
+              <Search size={22} strokeWidth={1.75} />
+            </button>
+          </div>
+
+          {/* Nav - right */}
+          <div className="hidden md:flex items-center gap-9 text-[15px] font-bold uppercase tracking-widest text-foreground justify-self-end">
             <Link to="/" className="hover:text-primary transition-colors duration-200">
               Home
             </Link>
@@ -54,14 +61,14 @@ export const Navbar = () => {
                   catalogueOpen ? "text-primary" : ""
                 }`}
               >
-                CATALOGUE
+                OUR PRODUCTS
                 <ChevronDown size={14} className={`transition-transform ${catalogueOpen ? "rotate-180" : ""}`} />
               </button>
               {catalogueOpen && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-[420px] bg-background border border-border shadow-hover max-h-[70vh] overflow-y-auto">
+                <div className="absolute right-0 top-full mt-4 w-[420px] bg-background border border-border shadow-hover max-h-[70vh] overflow-y-auto">
                   <div className="px-4 py-3 border-b border-border">
                     <p className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                      Browse CATALOGUE
+                      Browse Our Products
                     </p>
                   </div>
                   <CatalogueHierarchy onNavigate={() => setCatalogueOpen(false)} />
@@ -78,24 +85,22 @@ export const Navbar = () => {
               )}
             </div>
 
-            {links.slice(1).map((item) => (
-              <Link key={item.label} to={item.to} className="hover:text-primary transition-colors duration-200">
-                {item.label}
-              </Link>
-            ))}
+            <Link to="/gallery" className="hover:text-primary transition-colors duration-200">
+              Gallery
+            </Link>
+            <Link to="/about" className="hover:text-primary transition-colors duration-200">
+              About
+            </Link>
+            <Link to="/contact" className="hover:text-primary transition-colors duration-200">
+              Contact
+            </Link>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 hover:bg-muted rounded-full transition-colors"
-              aria-label="Search"
-            >
-              <Search size={20} strokeWidth={1.5} />
-            </button>
+          {/* Mobile menu toggle - right (mobile only) */}
+          <div className="md:hidden justify-self-end">
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 hover:bg-muted rounded-full transition-colors"
+              className="p-2 hover:bg-muted rounded-full transition-colors"
               aria-label="Menu"
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -117,27 +122,34 @@ export const Navbar = () => {
               <Link
                 to="/"
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 text-base font-medium hover:bg-muted rounded-sm"
+                className="block px-4 py-3 text-base font-bold uppercase tracking-widest hover:bg-muted rounded-sm"
               >
                 Home
               </Link>
               <div className="border-t border-border my-2" />
               <p className="px-4 pt-2 pb-1 text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                CATALOGUE
+                Our Products
               </p>
               <CatalogueHierarchy onNavigate={() => setMobileOpen(false)} />
               <div className="border-t border-border my-2" />
               <Link
+                to="/gallery"
+                onClick={() => setMobileOpen(false)}
+                className="block px-4 py-3 text-base font-bold uppercase tracking-widest hover:bg-muted rounded-sm"
+              >
+                Gallery
+              </Link>
+              <Link
                 to="/about"
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 text-base font-medium hover:bg-muted rounded-sm"
+                className="block px-4 py-3 text-base font-bold uppercase tracking-widest hover:bg-muted rounded-sm"
               >
                 About
               </Link>
               <Link
                 to="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 text-base font-medium hover:bg-muted rounded-sm"
+                className="block px-4 py-3 text-base font-bold uppercase tracking-widest hover:bg-muted rounded-sm"
               >
                 Contact
               </Link>

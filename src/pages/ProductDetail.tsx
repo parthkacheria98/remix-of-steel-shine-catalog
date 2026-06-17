@@ -46,7 +46,7 @@ const ProductDetail = () => {
   const toneClass = product.brandSlug === "deep" ? "text-deep" : "text-angel";
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 py-16">
+    <div data-brand={product.brandSlug} className="max-w-[1200px] mx-auto px-6 py-16">
       <div className="mb-6">
         <Link
           to={`/categories/${product.brandSlug}/${product.categorySlug}`}

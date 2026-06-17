@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
+import { CatalogueHierarchy } from "@/components/CatalogueMenu";
+import { GallerySection } from "@/components/GallerySection";
 import { useCatalog } from "@/data/useCatalog";
 import { Shield, Droplets, Clock, Award } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
@@ -43,7 +45,7 @@ const Index = () => {
                 className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-md"
               >
                 Home of the <span className="text-deep font-semibold">Deep</span> and{" "}
-                <span className="text-angel font-semibold">Angel</span> ranges. Durable • Hygienic • Long Lasting.
+                <span className="text-angel font-semibold">Angel</span> ranges. Durable, hygienic, long lasting.
                 Engineered for professional kitchens and modern homes.
               </motion.p>
               <motion.div {...fadeIn} transition={{ ...fadeIn.transition, delay: 0.3 }} className="flex gap-3">
@@ -69,19 +71,38 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Our Products - hierarchy */}
+      <section className="bg-muted/30 border-y border-border">
+        <div className="max-w-[1200px] mx-auto px-6 py-20">
+          <div className="mb-10">
+            <span className="text-primary font-mono text-xs tracking-tighter uppercase">Explore</span>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tighter mt-2">Our Products</h2>
+            <p className="text-muted-foreground mt-3 max-w-lg">
+              Browse the full range across our two brands, organised by category and product.
+            </p>
+          </div>
+          {isLoading && <p className="text-muted-foreground">Loading…</p>}
+          {error && <p className="text-destructive">Failed to load.</p>}
+          <div className="bg-background border border-border max-w-3xl">
+            <CatalogueHierarchy variant="full" />
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery preview */}
+      <GallerySection />
+
       {/* Categories */}
       <section className="max-w-[1200px] mx-auto px-6 pb-20">
         <div className="flex items-end justify-between mb-12">
           <div>
             <span className="text-primary font-mono text-xs tracking-tighter uppercase">Product Range</span>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tighter mt-2">Featured Categories</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tighter mt-2">Our Categories</h2>
           </div>
           <Link to="/categories" className="text-sm font-semibold hover:text-primary transition-colors flex items-center gap-2">
             View All <span>→</span>
           </Link>
         </div>
-        {isLoading && <p className="text-muted-foreground">Loading catalogue…</p>}
-        {error && <p className="text-destructive">Failed to load catalogue.</p>}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
           {categories.slice(0, 8).map((cat) => (
             <CategoryCard key={`${cat.brandSlug}-${cat.slug}`} category={cat} />

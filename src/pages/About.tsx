@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shield, Factory, Award, Users } from "lucide-react";
+import { Shield, Factory, Award, Users, Play } from "lucide-react";
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 const fadeIn = {
@@ -44,6 +44,28 @@ const About = () => (
               <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Video */}
+    <section className="max-w-[1200px] mx-auto px-6 py-20">
+      <div className="mb-10 max-w-2xl">
+        <span className="text-primary font-mono text-xs tracking-tighter uppercase">Inside the Factory</span>
+        <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tighter mt-2">See How We Build</h2>
+        <p className="text-muted-foreground mt-3">
+          A look at our manufacturing floor, craftsmanship, and quality process.
+        </p>
+      </div>
+      <div className="relative aspect-video bg-foreground border border-border overflow-hidden group cursor-pointer">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-hover group-hover:scale-110 transition-transform">
+            <Play size={28} strokeWidth={2} className="text-primary-foreground ml-1" fill="currentColor" />
+          </div>
+        </div>
+        <div className="absolute bottom-6 left-6 text-background/80">
+          <p className="text-[10px] uppercase tracking-[0.2em] font-bold">Coming Soon</p>
+          <p className="text-sm font-heading mt-1">Factory tour video</p>
         </div>
       </div>
     </section>

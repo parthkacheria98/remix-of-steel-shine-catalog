@@ -77,3 +77,12 @@
     text-wrap: balance;
   }
 }
+
+/* Deep brand theme override - applies on Deep category/product pages */
+[data-brand="deep"] {
+  --primary: 358 84% 56%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 358 84% 56%;
+  --accent-foreground: 0 0% 100%;
+  --ring: 358 84% 56%;
+}
