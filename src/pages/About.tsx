@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shield, Factory, Award, Users } from "lucide-react";
+import { Shield, Factory, Award, Users, Play } from "lucide-react";
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 const fadeIn = {

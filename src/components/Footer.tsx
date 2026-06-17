@@ -19,7 +19,8 @@ export const Footer = () => (
           <h4 className="font-heading font-semibold text-sm uppercase tracking-widest mb-4">Navigation</h4>
           <div className="flex flex-col gap-3 text-sm text-muted-foreground">
             <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-            <Link to="/categories" className="hover:text-primary transition-colors">Catalogue</Link>
+            <Link to="/categories" className="hover:text-primary transition-colors">Our Products</Link>
+            <Link to="/gallery" className="hover:text-primary transition-colors">Gallery</Link>
             <Link to="/about" className="hover:text-primary transition-colors">About</Link>
             <Link to="/contact" className="hover:text-primary transition-colors">Contact</Link>
           </div>
